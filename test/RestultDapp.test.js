@@ -39,7 +39,7 @@ contract('ResultDapp',(accounts) => {
     })
 
     // list results 
-    it("get result", async() => {
+    it("list result", async() => {
         const result_count = await this.resultList.result_count()
         const results_output= await this.resultList.results(result_count)
         // console.log("Result:",results_output)
@@ -53,6 +53,21 @@ contract('ResultDapp',(accounts) => {
         assert.equal(results_output.course_name_two,"CS203")
         assert.equal(results_output.grade_one,"3")
         assert.equal(results_output.grade_two,"4")
+    })
+
+    // get a single result
+    it("get a single result", async() => {
+        const result_count = await this.resultList.result_count()
+        const results_output= await this.resultList.getResult(result_count)
+        // console.log("Result:",results_output)
+        //test
+        assert.equal(results_output['1'],'John Doe')
+        assert.equal(results_output['2'],'UJ/2023/ns/3456')
+        assert.equal(results_output['3'],'Engineering')
+        assert.equal(results_output['4'],'CS202')
+        assert.equal(results_output['5'],'CS203')
+        assert.equal(results_output['6'],'3')
+        assert.equal(results_output['7'],'4')
     })
     
 })
